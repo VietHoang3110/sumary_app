@@ -1,0 +1,314 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:sumary_app/src/src_index.dart';
+import 'package:sumary_app/widgets/widgets.dart';
+
+
+class Tab_Survey_Favorite_Widget extends StatefulWidget {
+  const Tab_Survey_Favorite_Widget({Key? key}) : super(key: key);
+
+  @override
+  State<Tab_Survey_Favorite_Widget> createState() => _Tab_Survey_Favorite_WidgetState();
+}
+
+class _Tab_Survey_Favorite_WidgetState extends State<Tab_Survey_Favorite_Widget> {
+
+  bool checkAll = false;
+
+  List<Map<String,dynamic>> title = [
+    {"image":"assets/icons/pt_yourseft.svg", "name":'Stress, lo âu & sợ hãi', 'bool':false},
+    {"image":"assets/icons/nong_gian.svg", "name":"Nóng giận & Bực tức khó chịu", 'bool':false},
+    {"image":"assets/icons/chan_nan.svg", "name":'Chán nản tuyệt vọng & Trầm cảm', 'bool':false},
+    {"image":"assets/icons/dau_buon.svg", "name":'Đau buồn', 'bool':false},
+    {"image":"assets/icons/tu_ti.svg", "name":'Mặc cảm tự ti', 'bool':false},
+    {"image":"assets/icons/toi_loi.svg", "name":'Cảm giác tội lỗi', 'bool':false},
+    {"image":"assets/icons/ham_muon.svg", "name":'Ham muốn & dục vọng', 'bool':false},
+    {"image":"assets/icons/chude_khac.svg", "name":'Chủ đề khác', 'bool':false},
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  Image.asset('assets/images/header.png', width: AppValue.widths,  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: AppValue.heights*0.153),
+                    child: Container(
+                      width: AppValue.widths,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: AppValue.heights*0.027),
+                            child: Text("GÓC THAM VẤN",
+                              style: AppStyle.DEFAULT_24
+                                  .copyWith(fontSize: 25, color: COLORS.PRIMARY_COLOR, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                            child: Container(
+                              color: COLORS.BLACK,
+                              width: 50,
+                              height: 1,
+                            ),
+                          ),
+                          SizedBox(
+                            width: AppValue.widths*0.62,
+                            child: WidgetText(
+                              title: "Cảm xúc nào thường đến quấy nhiễu cuộc sống nội tâm của bạn?",
+                              style: AppStyle.DEFAULT_16,
+                              maxLine: 2,
+                            ),
+                          ),
+                          Stack(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: AppValue.heights*0.56),
+                                child: Row(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: SvgPicture.asset(
+                                            "assets/icons/circle_left.svg"
+                                        )),
+
+                                    SvgPicture.asset("assets/icons/bottomBook.svg", width: AppValue.widths*0.75,),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:  EdgeInsets.only(left: AppValue.widths*0.08, right: AppValue.widths*0.08,),
+                                child: GridView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 1,
+                                      mainAxisExtent: AppValue.heights*0.077,
+                                    ),
+                                    itemCount: title.length,
+                                    itemBuilder: (context, index){
+                                      return Item(index: index,
+                                        image: title[index]["image"],
+                                        title: title[index]["name"],
+                                        checkAll: checkAll,);
+                                    }),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: AppValue.heights*0.025,),
+                          InkWell(
+                            onTap: (){
+                              AppNavigator.navigateIntro();
+                            },
+                            child: Container(
+                              width: AppValue.widths*0.67,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topRight,
+                                      colors: [
+                                        COLORS.PRIMARY_COLOR,
+                                        COLORS.PRIMARY_COLOR2,
+                                      ]
+                                  )
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 9, bottom: 8),
+                                child: Text("TIẾP TỤC",
+                                  style: AppStyle.DEFAULT_16
+                                      .copyWith(fontWeight: FontWeight.w500, color: COLORS.WHITE),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: AppValue.heights*0.011 ,),
+                          InkWell(
+                            onTap: (){
+                              AppNavigator.navigateSevice_Pack1();
+                            },
+                            child: Container(
+                              width: AppValue.widths*0.67,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  border: Border.all(width: 1.5, color: COLORS.GREY)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 9, bottom: 8),
+                                child: Text("BỎ QUA",
+                                  style: AppStyle.DEFAULT_16
+                                      .copyWith(fontWeight: FontWeight.w500, color: COLORS.GREY),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: AppValue.heights*0.022,),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: SvgPicture.asset("assets/icons/circle_bottom.svg"),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  _itemAppBar(),
+                ],
+              ),
+
+            ],
+          ),
+        )
+    );
+  }
+  _itemAppBar(){
+    return  Padding(
+      padding: EdgeInsets.only(top: AppValue.heights*0.05, left: AppValue.widths*0.042, right: AppValue.widths*0.042,),
+      child: Row(
+        children: [
+          Image.asset('assets/ic_launcher.png', width: 53, height: 53,),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('Tiềm năng', style: AppStyle.DEFAULT_16_BOLD.copyWith(color: COLORS.WHITE),),
+              Text("Master", style: AppStyle.DEFAULT_16_BOLD.copyWith(color: COLORS.SECONDS_COLOR),),
+            ],
+          ),
+          Spacer(),
+          InkWell(
+              onTap: (){
+                setState(() {
+                  checkAll = !checkAll;
+                });
+              },
+              child:  Container(
+                width: AppValue.widths*0.31,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        colors: [
+                          COLORS.PRIMARY_COLOR,
+                          COLORS.PRIMARY_COLOR2,
+                        ]
+                    )
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 9, bottom: 8.5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Chọn tất cả", style: AppStyle.DEFAULT_12.copyWith(fontSize: 13, color: COLORS.WHITE),),
+                      SizedBox(width: 5,),
+                      Container(
+                        width: 13,
+                        height: 13,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3),
+                            color: COLORS.PRIMARY_COLOR,
+                            border: Border.all(color: COLORS.WHITE, width: 1)
+                        ),
+                        child: checkAll == true ? SvgPicture.asset("assets/icons/select.svg") : Container(),
+                      )
+                    ],
+                  ),
+                ),
+              )
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class Item extends StatefulWidget {
+  Item({Key? key,
+    required this.index,
+    required this.image,
+    required this.title,
+    required this.checkAll
+  }) : super(key: key);
+
+  bool checkAll;
+  int index;
+  String image;
+  String title;
+
+  @override
+  State<Item> createState() => _ItemState();
+}
+
+class _ItemState extends State<Item> {
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: (){
+        setState(() {
+          widget.checkAll = !widget.checkAll;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 15, left: 10, right: 10),
+        child: Container(
+          decoration: BoxDecoration(
+              color: (widget.checkAll == true ? COLORS.PRIMARY_COLOR : COLORS.WHITE),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  color:  COLORS.GREY_400,
+                  offset:  Offset(1,5),
+                )
+              ]
+          ),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 5, right: 10),
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: COLORS.WHITE,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset("${widget.image}"),
+                    ],
+                  ),
+                ),
+              ),
+              WidgetText(
+                title: "${widget.title}",
+                style: AppStyle.DEFAULT_14.copyWith(
+                    color: (widget.checkAll == true ? COLORS.WHITE : COLORS.BLACK)
+                ),
+              ),
+              Spacer(),
+              (widget.checkAll == true
+                  ? SvgPicture.asset("assets/icons/choosenItem.svg")
+                  : SvgPicture.asset("assets/icons/unchoosen.svg")
+              ),
+              SizedBox(width: 10,)
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
